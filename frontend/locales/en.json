@@ -562,6 +562,7 @@
         "description": "Description",
         "details": "Details",
         "drag_and_drop": "Drag and drop files here or click to select files",
+        "paste_image_hint": "Or press Ctrl+V to paste an image",
         "duplicate": {
             "copy_attachments": "Copy Attachments",
             "copy_custom_fields": "Copy Custom Fields",

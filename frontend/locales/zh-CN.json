@@ -518,6 +518,7 @@
         "description": "说明",
         "details": "详情",
         "drag_and_drop": "将文件拖拽到此或点击添加文件",
+        "paste_image_hint": "或按 Ctrl+V 粘贴图片",
         "duplicate": {
             "copy_attachments": "复制附件",
             "copy_custom_fields": "复制自定义字段",

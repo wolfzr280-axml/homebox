@@ -498,6 +498,7 @@
         "description": "描述",
         "details": "細節描述",
         "drag_and_drop": "拖放或點此選擇檔案",
+        "paste_image_hint": "或按 Ctrl+V 貼上圖片",
         "duplicate": {
             "copy_attachments": "複製附件",
             "copy_custom_fields": "複製自訂欄位",

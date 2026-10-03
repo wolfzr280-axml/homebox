@@ -28,6 +28,7 @@
   import BaseCard from "@/components/Base/Card.vue";
   import { Card } from "~/components/ui/card";
   import DropZone from "~/components/global/DropZone.vue";
+  import { useClipboardImagePaste } from "~/composables/use-clipboard-image-paste";
   import EntitySelector from "~/components/Entity/Selector.vue";
   import { useEntityTypeStore } from "~/stores/entityTypes";
 
@@ -203,6 +204,16 @@
 
   const dropPhoto = (files: File[] | null) => uploadAttachment(files, AttachmentTypes.Photo);
   const dropAttachment = (files: File[] | null) => uploadAttachment(files, AttachmentTypes.Attachment);
+
+  // Ctrl+V a screenshot or copied image anywhere on the page to attach it as a photo.
+  useClipboardImagePaste(
+    async files => {
+      for (const file of files) {
+        await uploadAttachment([file], AttachmentTypes.Photo);
+      }
+    },
+    { ignoreWhenDialogOpen: true }
+  );
 
   async function uploadAttachment(files: File[] | null, type: AttachmentTypes | null) {
     if (!files || files.length === 0 || !files[0]) {
@@ -493,6 +504,7 @@
             >
               <input ref="refAttachmentInput" hidden type="file" @change="uploadImage" />
               <p>{{ $t("items.drag_and_drop") }}</p>
+              <p class="text-sm text-muted-foreground">{{ $t("items.paste_image_hint") }}</p>
             </button>
           </div>
 

@@ -19,6 +19,7 @@
           @change="onFilesSelected"
         />
       </div>
+      <p class="px-1 text-sm text-muted-foreground">{{ $t("items.paste_image_hint") }}</p>
     </div>
   </div>
 </template>
@@ -30,6 +31,7 @@
   import { Input } from "~/components/ui/input";
   import { Button } from "~/components/ui/button";
   import { filesToPhotoPreviews, type PhotoPreview } from "./photo-uploader";
+  import { useClipboardImagePaste } from "~/composables/use-clipboard-image-paste";
 
   const props = withDefaults(
     defineProps<{
@@ -57,6 +59,11 @@
   function openFilePicker() {
     fileInput.value?.click();
   }
+
+  // The uploader only exists while its modal is open, so a window-level listener is safe here.
+  useClipboardImagePaste(async files => {
+    emit("selected", await filesToPhotoPreviews(files, props.existingCount));
+  });
 
   async function onFilesSelected(event: Event) {
     const input = event.target as HTMLInputElement;
